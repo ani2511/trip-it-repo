@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Bot, MessageSquareText, ShieldCheck, DollarSign, Users, FormInput, FileText, ArrowRight, Clock, Zap, Sun, Moon, Mail, Phone, Heart } from 'lucide-react';
-import l1 from './tripit_logo.jpeg';
+import l1 from './tripit_logo.png';
 
 
 // --- Theme Definitions ---
