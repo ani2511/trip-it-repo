@@ -22,7 +22,7 @@ const darkTheme = {
     whatsappDot: 'bg-green-300',
     whatsappChatBg: 'bg-[#121b21]', 
     whatsappBubbleOutgoing: 'bg-[#005c4b]', 
-    whatsappBubbleIncoming: 'bg-gray-700',  
+    whatsappBubbleIncoming: 'bg-gray-700',  
 };
 
 const lightTheme = {
@@ -43,7 +43,7 @@ const lightTheme = {
     whatsappDot: 'bg-emerald-300',
     whatsappChatBg: 'bg-[#ECE5DD]', 
     whatsappBubbleOutgoing: 'bg-[#D9FDD3]', 
-    whatsappBubbleIncoming: 'bg-white',     
+    whatsappBubbleIncoming: 'bg-white',     
 };
 
 // --- Data Structures ---
@@ -84,12 +84,12 @@ const getInitialTheme = () => {
 };
 
 // -----------------------------------------------------------------------------
-//                                 COMPONENTS
+//                                 COMPONENTS
 // -----------------------------------------------------------------------------
 
 /**
- * Header Component (Navigation, Logo, Theme Toggle)
- */
+ * Header Component (Navigation, Logo, Theme Toggle)
+ */
 const Header = ({ theme, toggleTheme, activeSection }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSticky, setIsSticky] = useState(false);
@@ -121,12 +121,12 @@ const Header = ({ theme, toggleTheme, activeSection }) => {
                     className="text-3xl font-extrabold flex items-center tracking-tight focus:outline-none"
                 >
                     {/* LOGO IMAGE IMPLEMENTATION */}
-                  <img 
-  src={l1}
-  alt="TRIPIT Logo"
-  className="h-7 w-auto mr-2 md:h-8"
-  style={{ filter: theme === 'dark' ? 'brightness(1.2)' : 'none' }}
-/>
+                    <img 
+                        src={l1}
+                        alt="TRIPIT Logo"
+                        className="h-7 w-auto mr-2 md:h-8"
+                        style={{ filter: theme === 'dark' ? 'brightness(1.2)' : 'none' }}
+                    />
 
                     <span className={`text-3xl font-extrabold ${currentTheme.textPrimary}`}>TRIPIT</span>
                 </button>
@@ -219,8 +219,8 @@ const Header = ({ theme, toggleTheme, activeSection }) => {
 };
 
 /**
- * Animated Globe SVG Component
- */
+ * Animated Globe SVG Component
+ */
 const AnimatedGlobeSVG = ({ theme }) => {
     return (
         <div className={`w-full max-w-5xl mx-auto mt-12 mb-8 ${theme}`} style={{ height: '300px' }}>
@@ -278,8 +278,8 @@ const AnimatedGlobeSVG = ({ theme }) => {
 };
 
 /**
- * Animated WhatsApp Chat Demo
- */
+ * Animated WhatsApp Chat Demo
+ */
 const AnimatedWhatsAppChat = ({ theme }) => {
     const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
     const currentTheme = theme === 'dark' ? darkTheme : lightTheme;
@@ -356,7 +356,7 @@ const AnimatedWhatsAppChat = ({ theme }) => {
             <div className={`absolute bottom-0 left-0 right-0 p-4 ${currentTheme.bgSecondary} rounded-b-[1.5rem] z-10`}>
                 {currentMessageIndex < messages.length && (
                     <div className={`p-2 mx-auto max-w-xs rounded-full flex items-center justify-center ${currentTheme.cardBg} shadow-inner`}>
-                         <span className={`text-sm italic ${currentTheme.textSecondary} flex items-center`}>
+                          <span className={`text-sm italic ${currentTheme.textSecondary} flex items-center`}>
                             {messages[currentMessageIndex].outgoing === false && "Bot is typing..."}
                             {messages[currentMessageIndex].outgoing === true && "Awaiting traveller input..."}
                         </span>
@@ -364,7 +364,7 @@ const AnimatedWhatsAppChat = ({ theme }) => {
                 )}
                 {currentMessageIndex >= messages.length && (
                     <div className={`p-2 mx-auto max-w-xs rounded-full flex items-center justify-center ${currentTheme.cardBg} shadow-inner`}>
-                         <span className={`text-sm italic ${currentTheme.textSecondary}`}>
+                          <span className={`text-sm italic ${currentTheme.textSecondary}`}>
                             Restarting demo...
                         </span>
                     </div>
@@ -387,8 +387,8 @@ const AnimatedWhatsAppChat = ({ theme }) => {
 };
 
 /**
- * Workflow Step Component
- */
+ * Workflow Step Component
+ */
 const WorkflowStep = ({ step, index, isVisible, theme }) => {
     const currentTheme = theme === 'dark' ? darkTheme : lightTheme;
     const accentColor = currentTheme.primaryColor.replace('text', 'bg');
@@ -403,27 +403,27 @@ const WorkflowStep = ({ step, index, isVisible, theme }) => {
             `}
             style={{ transitionDelay: isVisible ? `${index * 150}ms` : '0ms' }}
         >
-          {/* Step Circle */}
-          <div className={`w-14 h-14 rounded-full ${accentColor} flex items-center justify-center ${currentTheme.textPrimary} font-bold text-xl mb-4 shadow-xl ring-8 ${accentRing} transform transition-all duration-500 group-hover:scale-110 ${accentHoverShadow}`} style={{ zIndex: 10 }}>
-            {index + 1}
-          </div>
-          {/* Content Card */}
-          <div className={`${currentTheme.cardBg} p-6 rounded-xl shadow-lg ${currentTheme.cardBorder} border mt-2 h-full transition-all duration-300 hover:${currentTheme.bgSecondary.replace('bg-', 'bg-')}`}>
-            <step.icon className={`w-6 h-6 ${currentTheme.primaryColor} mx-auto mb-3`} />
-            <h4 className={`text-lg font-bold ${currentTheme.textPrimary} mb-2`}>{step.title}</h4>
-            <p className={`text-sm ${currentTheme.textSecondary}`}>{step.description}</p>
-          </div>
-          {/* Vertical line for mobile */}
-          {index < WORKFLOW_STEPS.length - 1 && (
-            <div className={`absolute left-1/2 top-14 bottom-[-3rem] w-0.5 ${accentColor}/30 transform -translate-x-1/2 lg:hidden`}></div>
-          )}
+            {/* Step Circle */}
+            <div className={`w-14 h-14 rounded-full ${accentColor} flex items-center justify-center ${currentTheme.textPrimary} font-bold text-xl mb-4 shadow-xl ring-8 ${accentRing} transform transition-all duration-500 group-hover:scale-110 ${accentHoverShadow}`} style={{ zIndex: 10 }}>
+                {index + 1}
+            </div>
+            {/* Content Card */}
+            <div className={`${currentTheme.cardBg} p-6 rounded-xl shadow-lg ${currentTheme.cardBorder} border mt-2 h-full transition-all duration-300 hover:${currentTheme.bgSecondary.replace('bg-', 'bg-')}`}>
+                <step.icon className={`w-6 h-6 ${currentTheme.primaryColor} mx-auto mb-3`} />
+                <h4 className={`text-lg font-bold ${currentTheme.textPrimary} mb-2`}>{step.title}</h4>
+                <p className={`text-sm ${currentTheme.textSecondary}`}>{step.description}</p>
+            </div>
+            {/* Vertical line for mobile */}
+            {index < WORKFLOW_STEPS.length - 1 && (
+                <div className={`absolute left-1/2 top-14 bottom-[-3rem] w-0.5 ${accentColor}/30 transform -translate-x-1/2 lg:hidden`}></div>
+            )}
         </div>
     );
 };
 
 /**
- * Animated Number Counter Component
- */
+ * Animated Number Counter Component
+ */
 const NumberCounter = ({ targetValue, duration, theme }) => {
     const [count, setCount] = useState(0);
     const ref = useRef(null);
@@ -478,8 +478,8 @@ const NumberCounter = ({ targetValue, duration, theme }) => {
 };
 
 /**
- * ROI Section Component
- */
+ * ROI Section Component
+ */
 const ROISection = ({ theme }) => {
     const currentTheme = theme === 'dark' ? darkTheme : lightTheme;
     const accentBg = theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100';
@@ -512,7 +512,7 @@ const ROISection = ({ theme }) => {
                         <Users className={`w-8 h-8 md:w-10 md:h-10 text-yellow-500 mx-auto mb-4`} />
                         <NumberCounter targetValue={1000} duration={1800} theme={theme} />
                         <p className={`text-xl font-semibold ${currentTheme.textPrimary} mt-4`}>Travellers Managed Cost-Efficiently</p>
-                        <p className={`text-sm ${currentTheme.textSecondary} mt-2`}>Handle thousands of groups with the same ops team.</p> {/* THIS LINE IS NOW CORRECT */}
+                        <p className={`text-sm ${currentTheme.textSecondary} mt-2`}>Handle thousands of groups with the same ops team.</p>
                     </div>
                 </div>
             </div>
@@ -521,8 +521,8 @@ const ROISection = ({ theme }) => {
 };
 
 /**
- * Contact/Form Section Component (Active Form)
- */
+ * Contact/Form Section Component (Active Form)
+ */
 const ContactSection = ({ theme }) => {
     const currentTheme = theme === 'dark' ? darkTheme : lightTheme;
     const inputClasses = `w-full p-3 rounded-lg ${currentTheme.cardBg} ${currentTheme.cardBorder} border focus:ring-2 ${currentTheme.primaryColor.replace('text', 'focus:ring')} ${currentTheme.textPrimary} placeholder:${currentTheme.textSecondary}`;
@@ -659,7 +659,7 @@ const ContactSection = ({ theme }) => {
 
 
 // -----------------------------------------------------------------------------
-//                             MAIN APP COMPONENT
+//                             MAIN APP COMPONENT
 // -----------------------------------------------------------------------------
 
 const App = () => {
@@ -835,7 +835,7 @@ const App = () => {
                     </div>
                 </div>
             </section>
-            
+
             {/* Workflow Section (Now before ROI) */}
             <section id="workflow" className={`py-20 md:py-32 ${currentTheme.bgSecondary} border-t border-b ${currentTheme.cardBorder}`}>
                 <div className="container mx-auto px-4 sm:px-6">
@@ -921,9 +921,9 @@ const App = () => {
                     {/* Logo (Refreshes page on click) */}
                     <button onClick={() => window.location.reload()} className="inline-block mb-6 focus:outline-none">
                         <h1 className={`text-3xl font-extrabold ${currentTheme.textPrimary} tracking-tight flex items-center justify-center`}>
-                            {/* LOGO IMAGE IMPLEMENTATION */}
+                            {/* LOGO IMAGE IMPLEMENTATION - FIX APPLIED HERE */}
                             <img 
-                                src="/tripit_logo.jpeg" 
+                                src={l1} 
                                 alt="TRIPIT Logo" 
                                 className={`h-7 w-auto mr-2 md:h-8`} 
                                 style={{ filter: theme === 'dark' ? 'brightness(1.2)' : 'none' }}
