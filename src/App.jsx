@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Bot, MessageSquareText, ShieldCheck, DollarSign, Users, FormInput, FileText, ArrowRight, Clock, Zap, Sun, Moon, Mail, Phone, Heart } from 'lucide-react';
+import l1 from './tripit_logo.jpeg';
+
 
 // --- Theme Definitions ---
 const darkTheme = {
@@ -119,12 +121,13 @@ const Header = ({ theme, toggleTheme, activeSection }) => {
                     className="text-3xl font-extrabold flex items-center tracking-tight focus:outline-none"
                 >
                     {/* LOGO IMAGE IMPLEMENTATION */}
-                    <img 
-                        src="/tripit_logo.jpeg" 
-                        alt="TRIPIT Logo" 
-                        className={`h-7 w-auto mr-2 md:h-8`} 
-                        style={{ filter: theme === 'dark' ? 'brightness(1.2)' : 'none' }} 
-                    />
+                  <img 
+  src={l1}
+  alt="TRIPIT Logo"
+  className="h-7 w-auto mr-2 md:h-8"
+  style={{ filter: theme === 'dark' ? 'brightness(1.2)' : 'none' }}
+/>
+
                     <span className={`text-3xl font-extrabold ${currentTheme.textPrimary}`}>TRIPIT</span>
                 </button>
                 
