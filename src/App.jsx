@@ -18,10 +18,10 @@ const darkTheme = {
     accentShadow: 'shadow-blue-500/50',
     accentRing: 'ring-gray-900',
     accentButton: 'bg-blue-600 text-white',
-    accentButtonHover: 'hover:hover:bg-blue-700',
+    accentButtonHover: 'hover:bg-blue-700',
     whatsappBg: 'bg-green-600',
     whatsappDot: 'bg-green-300',
-    whatsappChatBg: 'bg-gray-100', // 👈 CONSISTENT (Light Gray)
+    whatsappChatBg: 'bg-gray-100', // CONSISTENT (Light Gray)
     whatsappBubbleOutgoing: 'bg-[#005c4b]', 
     whatsappBubbleIncoming: 'bg-white', // Incoming bubble color
 };
@@ -42,7 +42,7 @@ const lightTheme = {
     accentButtonHover: 'hover:bg-indigo-700',
     whatsappBg: 'bg-emerald-500',
     whatsappDot: 'bg-emerald-300',
-    whatsappChatBg: 'bg-gray-100', // 👈 CONSISTENT (Light Gray)
+    whatsappChatBg: 'bg-gray-100', // CONSISTENT (Light Gray)
     whatsappBubbleOutgoing: 'bg-[#D9FDD3]', 
     whatsappBubbleIncoming: 'bg-white', // Incoming bubble color
 };
@@ -63,6 +63,7 @@ const PAIN_POINTS = [
     { icon: DollarSign, title: "High Labour Costs", description: "Scaling manual operations always translates to higher labour costs and reduced team efficiency.", color: "bg-purple-100 text-purple-600 dark:bg-purple-500/20 dark:text-purple-400" },
 ];
 
+// RESTORED: The 5-step automated workflow
 const WORKFLOW_STEPS = [
     { icon: Users, title: "Upload Traveller Data", description: "Import group details in bulk securely.", delay: 0 },
     { icon: FormInput, title: "Design & Launch Forms", description: "Collect documents and preferences via custom forms.", delay: 100 },
@@ -116,7 +117,7 @@ const Header = ({ theme, toggleTheme, activeSection }) => {
         <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isSticky ? `${currentTheme.bgSecondary} shadow-xl py-3` : 'bg-transparent py-4'}`}>
             <div className="container mx-auto px-4 sm:px-6 flex justify-between items-center">
                 
-                {/* LOGO: Image + Text (TRIPIT) - Refreshes on click */}
+                {/* LOGO: Image + Text (TRIPIT) */}
                 <button 
                     onClick={handleLogoClick}
                     className="text-3xl font-extrabold flex items-center tracking-tight focus:outline-none"
@@ -176,6 +177,7 @@ const Header = ({ theme, toggleTheme, activeSection }) => {
                     >
                         Contact Us
                     </button>
+                    
                     {/* Theme Toggle Button (Mobile - stays visible) */}
                     <button
                         onClick={toggleTheme}
@@ -565,6 +567,9 @@ const ContactSection = ({ theme }) => {
     const isSubmitting = status === 'submitting';
     const isSuccess = status === 'success';
 
+    // Set hideForm to true to hide the form input elements
+    const hideForm = true; 
+
     return (
         <section id="contact" className={`py-20 md:py-32 ${currentTheme.bgPrimary} border-t ${currentTheme.cardBorder}`}>
             <div className="container mx-auto px-4 sm:px-6">
@@ -578,80 +583,90 @@ const ContactSection = ({ theme }) => {
                 <div className="max-w-3xl mx-auto">
                     <div className={`p-8 md:p-12 rounded-2xl shadow-2xl ${currentTheme.bgSecondary} ${currentTheme.cardBorder} border`}>
                         
-                        <form className="space-y-6" onSubmit={handleSubmit}>
-                            <div className="grid md:grid-cols-2 gap-6">
+                        {/* ------------------------------------------- */}
+                        {/* FORM INPUTS (HIDDEN) */}
+                        {/* ------------------------------------------- */}
+                        {!hideForm && (
+                            <form className="space-y-6 mb-8" onSubmit={handleSubmit}>
+                                <div className="grid md:grid-cols-2 gap-6">
+                                    <input 
+                                        type="text" 
+                                        name="name"
+                                        placeholder="Your Name" 
+                                        className={inputClasses} 
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        required 
+                                        disabled={isSubmitting}
+                                    />
+                                    <input 
+                                        type="email" 
+                                        name="email"
+                                        placeholder="Work Email" 
+                                        className={inputClasses} 
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        required 
+                                        disabled={isSubmitting}
+                                    />
+                                </div>
                                 <input 
                                     type="text" 
-                                    name="name"
-                                    placeholder="Your Name" 
+                                    name="company"
+                                    placeholder="Company Name" 
                                     className={inputClasses} 
-                                    value={formData.name}
+                                    value={formData.company}
                                     onChange={handleChange}
                                     required 
                                     disabled={isSubmitting}
                                 />
-                                <input 
-                                    type="email" 
-                                    name="email"
-                                    placeholder="Work Email" 
+                                <textarea 
+                                    name="message"
+                                    placeholder="Tell us about your MICE or Leisure needs..." 
+                                    rows="4" 
                                     className={inputClasses} 
-                                    value={formData.email}
+                                    value={formData.message}
                                     onChange={handleChange}
-                                    required 
+                                    required
                                     disabled={isSubmitting}
-                                />
-                            </div>
-                            <input 
-                                type="text" 
-                                name="company"
-                                placeholder="Company Name" 
-                                className={inputClasses} 
-                                value={formData.company}
-                                onChange={handleChange}
-                                required 
-                                disabled={isSubmitting}
-                            />
-                            <textarea 
-                                name="message"
-                                placeholder="Tell us about your MICE or Leisure needs..." 
-                                rows="4" 
-                                className={inputClasses} 
-                                value={formData.message}
-                                onChange={handleChange}
-                                required
-                                disabled={isSubmitting}
-                            ></textarea>
-                            
-                            <button
-                                type="submit"
-                                className={`w-full px-8 py-3 ${currentTheme.accentButton} text-lg font-bold rounded-full shadow-lg ${currentTheme.accentShadow} ${currentTheme.accentButtonHover} transition duration-300 transform hover:scale-[1.01] flex items-center justify-center space-x-2 ${isSubmitting || isSuccess ? 'opacity-70 cursor-not-allowed' : ''}`}
-                                disabled={isSubmitting || isSuccess}
-                            >
-                                {isSubmitting && (
-                                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                    </svg>
+                                ></textarea>
+                                
+                                <button
+                                    type="submit"
+                                    className={`w-full px-8 py-3 ${currentTheme.accentButton} text-lg font-bold rounded-full shadow-lg ${currentTheme.accentShadow} ${currentTheme.accentButtonHover} transition duration-300 transform hover:scale-[1.01] flex items-center justify-center space-x-2 ${isSubmitting || isSuccess ? 'opacity-70 cursor-not-allowed' : ''}`}
+                                    disabled={isSubmitting || isSuccess}
+                                >
+                                    {isSubmitting && (
+                                        <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                    )}
+                                    {isSuccess ? 'Request Sent Successfully! 🎉' : (isSubmitting ? 'Sending Request...' : 'Request a Demo')}
+                                </button>
+                                
+                                {isSuccess && (
+                                    <p className="text-center text-green-500 font-semibold mt-4">
+                                        We've received your request and will be in touch shortly!
+                                    </p>
                                 )}
-                                {isSuccess ? 'Request Sent Successfully! 🎉' : (isSubmitting ? 'Sending Request...' : 'Request a Demo')}
-                            </button>
-                            
-                            {/* Success Message Display */}
-                            {isSuccess && (
-                                <p className="text-center text-green-500 font-semibold mt-4">
-                                    We've received your request and will be in touch shortly!
-                                </p>
-                            )}
-                        </form>
+                            </form>
+                        )}
+                        {/* ------------------------------------------- */}
 
-                        <div className={`mt-8 pt-6 border-t ${currentTheme.cardBorder}`}>
-                            <p className={`text-center text-sm font-semibold ${currentTheme.textPrimary} mb-4`}>Or contact us directly:</p>
-                            <div className="flex justify-center space-x-6">
-                                <a href="mailto:anup@tripit.tech" className={`flex items-center ${currentTheme.textSecondary} hover:${currentTheme.primaryColor.replace('text', 'text')} transition`}>
+                        {/* CONTACT DIRECTLY SECTION (Always visible) */}
+                        <div className={`mt-0 ${!hideForm ? 'pt-6 border-t' : ''} ${currentTheme.cardBorder}`}>
+                            <p className={`text-center text-sm font-semibold ${currentTheme.textPrimary} mb-4 ${!hideForm ? 'mt-8' : ''}`}>
+                                Get in touch:
+                            </p>
+                            <div className="flex justify-center space-x-6 flex-wrap">
+                                {/* Email in spam-safe text format */}
+                                <span className={`flex items-center ${currentTheme.textSecondary} transition mb-2 md:mb-0`}>
                                     <Mail className="w-5 h-5 mr-2" />
-                                    anup@tripit.tech
-                                </a>
-                                <a href="tel:9833686245" className={`flex items-center ${currentTheme.textSecondary} hover:${currentTheme.primaryColor.replace('text', 'text')} transition`}>
+                                    anup [at] tripit [dot] tech
+                                </span>
+                                {/* Phone number link */}
+                                <a href="tel:+919833686245" className={`flex items-center ${currentTheme.textSecondary} hover:${currentTheme.primaryColor.replace('text', 'text')} transition`}>
                                     <Phone className="w-5 h-5 mr-2" />
                                     +91 98336 86245
                                 </a>
@@ -774,12 +789,13 @@ const App = () => {
                         Automate MICE & Leisure Travel Operations
                     </p>
                     <h2 className={`text-5xl md:text-7xl font-extrabold ${currentTheme.textPrimary} leading-tight mb-6 animate-fadeIn delay-300`}>
-                        Grow your <span className={currentTheme.primaryColor}>Operations</span>.
-                        <br className="hidden sm:inline" /> seamlessly without Hiring ! 
+                        Grow your <span className={currentTheme.primaryColor}>Operations,</span>.
+                        <br className="hidden sm:inline" /> Seamlessly without hiring!
                     </h2>
                     <p className={`text-xl ${currentTheme.textSecondary} max-w-3xl mx-auto mb-10 animate-fadeIn delay-500`}>
                         tripIT Bot is the WhatsApp-first Chatbot that automates traveller communication, document distribution, and data collection in one unified, cost-efficient platform.
                     </p>
+                    {/* Primary CTA now links to the first content section */}
                     <button
                         onClick={() => ScrollToSection('problem')}
                         className={`px-8 py-3 md:px-10 md:py-4 ${currentTheme.accentButton} text-lg font-bold rounded-full shadow-xl ${currentTheme.accentShadow} ${currentTheme.accentButtonHover} transition duration-300 transform hover:scale-105 active:scale-95 animate-bounceIn delay-700 flex items-center justify-center mx-auto`}
@@ -839,16 +855,16 @@ const App = () => {
                                     <span className="text-green-500 mr-3 mt-1">&#10003;</span>
                                     Streamlines guest interaction through a WhatsApp-first chatbot.
                                 </li>
-                            </ul >
-                        </div >
+                            </ul>
+                        </div>
 
                         {/* Animated Chat Demo */}
                         <div className="lg:w-1/2 flex justify-center w-full mt-10 lg:mt-0">
                             <AnimatedWhatsAppChat theme={theme} />
                         </div>
-                    </div >
-                </div >
-            </section >
+                    </div>
+                </div>
+            </section>
 
             {/* Workflow Section (Now before ROI) */}
             <section id="workflow" className={`py-20 md:py-32 ${currentTheme.bgSecondary} border-t border-b ${currentTheme.cardBorder}`}>
@@ -862,6 +878,7 @@ const App = () => {
                         <div className={`hidden lg:block absolute top-1/2 left-0 right-0 h-1 ${currentTheme.primaryColor.replace('text', 'bg')}/30 transform -translate-y-1/2`}>
                         </div>
                         
+                        {/* RESTORED: Grid to lg:grid-cols-5 */}
                         <div className="grid lg:grid-cols-5 gap-8 md:gap-12 lg:gap-6">
                             {WORKFLOW_STEPS.map((step, index) => (
                                 <WorkflowStep 
@@ -927,7 +944,7 @@ const App = () => {
                 </div>
             </section>
 
-            {/* New Contact Section (With Active Form) */}
+            {/* RESTORED: Contact Section (Now acts as the definitive contact info block, with form hidden) */}
             <ContactSection theme={theme} />
             
             {/* CLEANED FOOTER */}
@@ -937,7 +954,7 @@ const App = () => {
                     {/* Logo (Refreshes page on click) */}
                     <button onClick={() => window.location.reload()} className="inline-block mb-6 focus:outline-none">
                         <h1 className={`text-3xl font-extrabold ${currentTheme.textPrimary} tracking-tight flex items-center justify-center`}>
-                            {/* LOGO IMAGE IMPLEMENTATION - Uses l1 (tripit_logo.png) */}
+                            {/* LOGO IMAGE IMPLEMENTATION - Restored */}
                             <img 
                                 src={l1} 
                                 alt="TRIPIT Logo" 
@@ -952,18 +969,19 @@ const App = () => {
                     <div className="flex justify-center space-x-6 text-sm mb-4">
                         <a href="#" className={`hover:${currentTheme.primaryColor.replace('text', 'text')} transition ${currentTheme.textSecondary}`}>Privacy Policy</a>
                         <a href="#" className={`hover:${currentTheme.primaryColor.replace('text', 'text')} transition ${currentTheme.textSecondary}`}>Terms of Service</a>
-                        <a href="mailto:anup@tripit.tech" className={`hover:${currentTheme.primaryColor.replace('text', 'text')} transition ${currentTheme.textSecondary}`}>Contact</a>
-                    </div >
+                        {/* Contact info uses spam-safe text format */}
+                        
+                    </div>
 
                     {/* Copyright and Made With Love */}
                     <p className={`text-sm ${currentTheme.textSecondary} mb-2`}>
-                        &copy; {new Date().getFullYear()} **tripIT Solutions**. All rights reserved.
+                        &copy; {new Date().getFullYear()} tripIT Solutions. All rights reserved.
                     </p>
                     <p className={`text-xs flex items-center justify-center ${currentTheme.textSecondary}`}>
-                        Made with <Heart className="w-3 h-3 mx-1 text-red-500" /> Mumbai, India.
+                        Made with <Heart className="w-3 h-3 mx-1 text-red-500" /> in Mumbai, India.
                     </p>
-                </div >
-            </footer >
+                </div>
+            </footer>
             
             {/* NEW CSS KEYFRAME FOR QUICKER TESTIMONIAL FADE */}
             <style jsx="true">{`
@@ -979,7 +997,7 @@ const App = () => {
                 }
             `}</style>
 
-        </div >
+        </div>
     );
 };
 
