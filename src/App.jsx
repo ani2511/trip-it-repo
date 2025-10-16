@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Bot, MessageSquareText, ShieldCheck, DollarSign, Users, FormInput, FileText, ArrowRight, Clock, Zap, Sun, Moon, Mail, Phone, Heart } from 'lucide-react';
-import l1 from './tripit_logo.png';
+import l1 from './tripit_logo.png'; // 👈 FINAL UPDATE: Changed to PNG for transparency and kept the correct path logic
+import { inject } from '@vercel/analytics'; // 👈 NEW: Vercel Analytics import
 
 
 // --- Theme Definitions ---
@@ -503,7 +504,7 @@ const ROISection = ({ theme }) => {
                     <div className={`p-6 md:p-8 rounded-2xl ${accentBg} ${currentTheme.cardBorder} border shadow-xl transition-all duration-300 hover:${currentTheme.accentShadow} transform hover:-translate-y-1`}>
                         <Zap className={`w-8 h-8 md:w-10 md:h-10 text-green-500 mx-auto mb-4`} />
                         <span className={`text-5xl md:text-6xl font-extrabold ${currentTheme.primaryColor}`}>Instant</span>
-                        <p className={`text-xl font-semibold ${currentTheme.textPrimary} mt-4`}>Traveller Query Resolution</p>
+                        <p className className={`text-xl font-semibold ${currentTheme.textPrimary} mt-4`}>Traveller Query Resolution</p>
                         <p className={`text-sm ${currentTheme.textSecondary} mt-2`}>Instant chatbot replies vs. hours or days of waiting.</p>
                     </div>
 
@@ -690,6 +691,12 @@ const App = () => {
             return newTheme;
         });
     };
+
+    // VERCEL ANALYTICS INJECTION ADDED HERE
+    useEffect(() => {
+        // Initializes Vercel Analytics tracking scripts once on page load
+        inject();
+    }, []);
 
     // Intersection Observer for Workflow Steps
     useEffect(() => {
@@ -921,7 +928,7 @@ const App = () => {
                     {/* Logo (Refreshes page on click) */}
                     <button onClick={() => window.location.reload()} className="inline-block mb-6 focus:outline-none">
                         <h1 className={`text-3xl font-extrabold ${currentTheme.textPrimary} tracking-tight flex items-center justify-center`}>
-                            {/* LOGO IMAGE IMPLEMENTATION - FIX APPLIED HERE */}
+                            {/* LOGO IMAGE IMPLEMENTATION - Uses l1 (tripit_logo.png) */}
                             <img 
                                 src={l1} 
                                 alt="TRIPIT Logo" 
