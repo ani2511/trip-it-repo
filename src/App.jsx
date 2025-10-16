@@ -18,7 +18,7 @@ const darkTheme = {
     accentShadow: 'shadow-blue-500/50',
     accentRing: 'ring-gray-900',
     accentButton: 'bg-blue-600 text-white',
-    accentButtonHover: 'hover:bg-blue-700',
+    accentButtonHover: 'hover:hover:bg-blue-700',
     whatsappBg: 'bg-green-600',
     whatsappDot: 'bg-green-300',
     whatsappChatBg: 'bg-gray-100', // 👈 CONSISTENT (Light Gray)
@@ -287,7 +287,7 @@ const AnimatedWhatsAppChat = ({ theme }) => {
 
     const messages = [
         { text: "Hello, tripIT Bot.", delay: 0, outgoing: true },
-        { text: "Dear Traveller, Welcome! I see you are registered for the  Georgia trip.", delay: 1500, outgoing: false },
+        { text: "Dear Traveller, Welcome! I see you are registered for the TEM Georgia trip.", delay: 1500, outgoing: false },
         { text: "Please select an option: 1. Download Documents 2. Submit Feedback 3. Contact Support", delay: 3500, outgoing: false },
         { text: "1. Download Documents", delay: 5500, outgoing: true },
         { text: "Fetching your documents...", delay: 7000, outgoing: false },
@@ -330,13 +330,14 @@ const AnimatedWhatsAppChat = ({ theme }) => {
                 {messages.slice(0, currentMessageIndex).map((msg, index) => {
                     const isOutgoing = msg.outgoing;
                     
-                    // 👈 FIX: Explicitly set text-gray-900 for incoming bubbles for visibility
-                    const incomingTextClass = 'text-gray-900'; 
+                    // Set text color explicitly for each bubble type:
+                    const outgoingTextColor = isOutgoing 
+                        ? 'text-white' // Outgoing is dark green, always use white text
+                        : 'text-gray-900'; // Incoming is white/light gray, always use dark text
 
                     const bubbleClasses = isOutgoing 
-                        ? `${currentTheme.whatsappBubbleOutgoing} ${theme === 'dark' ? 'text-white' : 'text-gray-900'} ml-auto rounded-tr-none`
-                        // Incoming bubbles must use the dark text color for contrast against the white/gray-100 background
-                        : `${currentTheme.whatsappBubbleIncoming} ${incomingTextClass} mr-auto rounded-tl-none`;
+                        ? `${currentTheme.whatsappBubbleOutgoing} ${outgoingTextColor} ml-auto rounded-tr-none`
+                        : `${currentTheme.whatsappBubbleIncoming} ${outgoingTextColor} mr-auto rounded-tl-none`;
 
                     return (
                         <div
@@ -774,7 +775,7 @@ const App = () => {
                     </p>
                     <h2 className={`text-5xl md:text-7xl font-extrabold ${currentTheme.textPrimary} leading-tight mb-6 animate-fadeIn delay-300`}>
                         Grow your <span className={currentTheme.primaryColor}>Operations</span>.
-                        <br className="hidden sm:inline" /> Seamlessly without Hiring!
+                        <br className="hidden sm:inline" /> seamlessly without Hiring ! 
                     </h2>
                     <p className={`text-xl ${currentTheme.textSecondary} max-w-3xl mx-auto mb-10 animate-fadeIn delay-500`}>
                         tripIT Bot is the WhatsApp-first Chatbot that automates traveller communication, document distribution, and data collection in one unified, cost-efficient platform.
@@ -838,16 +839,16 @@ const App = () => {
                                     <span className="text-green-500 mr-3 mt-1">&#10003;</span>
                                     Streamlines guest interaction through a WhatsApp-first chatbot.
                                 </li>
-                            </ul>
-                        </div>
+                            </ul >
+                        </div >
 
                         {/* Animated Chat Demo */}
                         <div className="lg:w-1/2 flex justify-center w-full mt-10 lg:mt-0">
                             <AnimatedWhatsAppChat theme={theme} />
                         </div>
-                    </div>
-                </div>
-            </section>
+                    </div >
+                </div >
+            </section >
 
             {/* Workflow Section (Now before ROI) */}
             <section id="workflow" className={`py-20 md:py-32 ${currentTheme.bgSecondary} border-t border-b ${currentTheme.cardBorder}`}>
@@ -952,7 +953,7 @@ const App = () => {
                         <a href="#" className={`hover:${currentTheme.primaryColor.replace('text', 'text')} transition ${currentTheme.textSecondary}`}>Privacy Policy</a>
                         <a href="#" className={`hover:${currentTheme.primaryColor.replace('text', 'text')} transition ${currentTheme.textSecondary}`}>Terms of Service</a>
                         <a href="mailto:anup@tripit.tech" className={`hover:${currentTheme.primaryColor.replace('text', 'text')} transition ${currentTheme.textSecondary}`}>Contact</a>
-                    </div>
+                    </div >
 
                     {/* Copyright and Made With Love */}
                     <p className={`text-sm ${currentTheme.textSecondary} mb-2`}>
@@ -961,8 +962,8 @@ const App = () => {
                     <p className={`text-xs flex items-center justify-center ${currentTheme.textSecondary}`}>
                         Made with <Heart className="w-3 h-3 mx-1 text-red-500" /> Mumbai, India.
                     </p>
-                </div>
-            </footer>
+                </div >
+            </footer >
             
             {/* NEW CSS KEYFRAME FOR QUICKER TESTIMONIAL FADE */}
             <style jsx="true">{`
@@ -978,7 +979,7 @@ const App = () => {
                 }
             `}</style>
 
-        </div>
+        </div >
     );
 };
 
