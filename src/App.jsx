@@ -6,11 +6,11 @@ import { inject } from '@vercel/analytics';
 
 // --- Theme Definitions ---
 const darkTheme = {
-    bgPrimary: 'bg-gray-900',
-    bgSecondary: 'bg-gray-800', // 👈 CHANGED: Darker secondary background for less visual noise
+    bgPrimary: 'bg-gray-900', // Base page color (Darkest)
+    bgSecondary: 'bg-gray-800', 
     textPrimary: 'text-white',
     textSecondary: 'text-gray-400',
-    cardBg: 'bg-gray-900', // 👈 CHANGED: Card background darker, often better in dark mode
+    cardBg: 'bg-gray-900', 
     cardBorder: 'border-gray-700',
     primaryColor: 'text-blue-400',
     accent: 'bg-blue-600',
@@ -21,9 +21,9 @@ const darkTheme = {
     accentButtonHover: 'hover:bg-blue-700',
     whatsappBg: 'bg-green-600',
     whatsappDot: 'bg-green-300',
-    whatsappChatBg: 'bg-gray-800', // 👈 CHANGED: Clean, cohesive background for the chat
+    whatsappChatBg: 'bg-gray-100', // 👈 CONSISTENT (Light Gray)
     whatsappBubbleOutgoing: 'bg-[#005c4b]', 
-    whatsappBubbleIncoming: 'bg-gray-900', // 👈 CHANGED: Bubble must be darker than chat bg to stand out
+    whatsappBubbleIncoming: 'bg-white', // Incoming bubble color
 };
 
 const lightTheme = {
@@ -42,9 +42,9 @@ const lightTheme = {
     accentButtonHover: 'hover:bg-indigo-700',
     whatsappBg: 'bg-emerald-500',
     whatsappDot: 'bg-emerald-300',
-    whatsappChatBg: 'bg-white', 
+    whatsappChatBg: 'bg-gray-100', // 👈 CONSISTENT (Light Gray)
     whatsappBubbleOutgoing: 'bg-[#D9FDD3]', 
-    whatsappBubbleIncoming: 'bg-gray-200', 
+    whatsappBubbleIncoming: 'bg-white', // Incoming bubble color
 };
 
 // --- Data Structures ---
@@ -287,7 +287,7 @@ const AnimatedWhatsAppChat = ({ theme }) => {
 
     const messages = [
         { text: "Hello, tripIT Bot.", delay: 0, outgoing: true },
-        { text: "Dear Traveller, Welcome! I see you are registered for the TEM Georgia trip.", delay: 1500, outgoing: false },
+        { text: "Dear Traveller, Welcome! I see you are registered for the  Georgia trip.", delay: 1500, outgoing: false },
         { text: "Please select an option: 1. Download Documents 2. Submit Feedback 3. Contact Support", delay: 3500, outgoing: false },
         { text: "1. Download Documents", delay: 5500, outgoing: true },
         { text: "Fetching your documents...", delay: 7000, outgoing: false },
@@ -329,9 +329,14 @@ const AnimatedWhatsAppChat = ({ theme }) => {
             <div className="pt-20 pb-12 h-full overflow-y-auto space-y-3 relative z-10">
                 {messages.slice(0, currentMessageIndex).map((msg, index) => {
                     const isOutgoing = msg.outgoing;
+                    
+                    // 👈 FIX: Explicitly set text-gray-900 for incoming bubbles for visibility
+                    const incomingTextClass = 'text-gray-900'; 
+
                     const bubbleClasses = isOutgoing 
                         ? `${currentTheme.whatsappBubbleOutgoing} ${theme === 'dark' ? 'text-white' : 'text-gray-900'} ml-auto rounded-tr-none`
-                        : `${currentTheme.whatsappBubbleIncoming} ${currentTheme.textPrimary} mr-auto rounded-tl-none`;
+                        // Incoming bubbles must use the dark text color for contrast against the white/gray-100 background
+                        : `${currentTheme.whatsappBubbleIncoming} ${incomingTextClass} mr-auto rounded-tl-none`;
 
                     return (
                         <div
@@ -768,9 +773,8 @@ const App = () => {
                         Automate MICE & Leisure Travel Operations
                     </p>
                     <h2 className={`text-5xl md:text-7xl font-extrabold ${currentTheme.textPrimary} leading-tight mb-6 animate-fadeIn delay-300`}>
-                        Grow your <span className={currentTheme.primaryColor}>Operations</span>.
-                        <br className="hidden sm:inline" /> Seamlessly without hiring!
-
+                        End the <span className={currentTheme.primaryColor}>Scaling Nightmare</span>.
+                        <br className="hidden sm:inline" /> Start Scaling Seamlessly.
                     </h2>
                     <p className={`text-xl ${currentTheme.textSecondary} max-w-3xl mx-auto mb-10 animate-fadeIn delay-500`}>
                         tripIT Bot is the WhatsApp-first Chatbot that automates traveller communication, document distribution, and data collection in one unified, cost-efficient platform.
@@ -952,10 +956,10 @@ const App = () => {
 
                     {/* Copyright and Made With Love */}
                     <p className={`text-sm ${currentTheme.textSecondary} mb-2`}>
-                        &copy; {new Date().getFullYear()} tripIT Solutions. All rights reserved.
+                        &copy; {new Date().getFullYear()} **tripIT Solutions**. All rights reserved.
                     </p>
                     <p className={`text-xs flex items-center justify-center ${currentTheme.textSecondary}`}>
-                        Made with <Heart className="w-3 h-3 mx-1 text-red-500" />in  Mumbai, India.
+                        Made with <Heart className="w-3 h-3 mx-1 text-red-500" /> Mumbai, India.
                     </p>
                 </div>
             </footer>
