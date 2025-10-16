@@ -774,7 +774,7 @@ const App = () => {
                     </p>
                     <h2 className={`text-5xl md:text-7xl font-extrabold ${currentTheme.textPrimary} leading-tight mb-6 animate-fadeIn delay-300`}>
                         Grow your <span className={currentTheme.primaryColor}>Operations</span>.
-                        <br className="hidden sm:inline" />  Seamlessly without Hiring!
+                        <br className="hidden sm:inline" /> Seamlessly without Hiring!
                     </h2>
                     <p className={`text-xl ${currentTheme.textSecondary} max-w-3xl mx-auto mb-10 animate-fadeIn delay-500`}>
                         tripIT Bot is the WhatsApp-first Chatbot that automates traveller communication, document distribution, and data collection in one unified, cost-efficient platform.
