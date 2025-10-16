@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Bot, MessageSquareText, ShieldCheck, DollarSign, Users, FormInput, FileText, ArrowRight, Clock, Zap, Sun, Moon, Mail, Phone, Heart } from 'lucide-react';
-import l1 from './tripit_logo.png'; // 👈 FINAL UPDATE: Changed to PNG for transparency and kept the correct path logic
-import { inject } from '@vercel/analytics'; // 👈 NEW: Vercel Analytics import
+import l1 from './tripit_logo.png'; 
+import { inject } from '@vercel/analytics'; 
 
 
 // --- Theme Definitions ---
 const darkTheme = {
     bgPrimary: 'bg-gray-900',
-    bgSecondary: 'bg-gray-700', 
+    bgSecondary: 'bg-gray-800', // 👈 CHANGED: Darker secondary background for less visual noise
     textPrimary: 'text-white',
     textSecondary: 'text-gray-400',
-    cardBg: 'bg-gray-800',
+    cardBg: 'bg-gray-900', // 👈 CHANGED: Card background darker, often better in dark mode
     cardBorder: 'border-gray-700',
     primaryColor: 'text-blue-400',
     accent: 'bg-blue-600',
@@ -21,9 +21,9 @@ const darkTheme = {
     accentButtonHover: 'hover:bg-blue-700',
     whatsappBg: 'bg-green-600',
     whatsappDot: 'bg-green-300',
-    whatsappChatBg: 'bg-[#121b21]', 
+    whatsappChatBg: 'bg-gray-800', // 👈 CHANGED: Clean, cohesive background for the chat
     whatsappBubbleOutgoing: 'bg-[#005c4b]', 
-    whatsappBubbleIncoming: 'bg-gray-700',  
+    whatsappBubbleIncoming: 'bg-gray-900', // 👈 CHANGED: Bubble must be darker than chat bg to stand out
 };
 
 const lightTheme = {
@@ -42,9 +42,9 @@ const lightTheme = {
     accentButtonHover: 'hover:bg-indigo-700',
     whatsappBg: 'bg-emerald-500',
     whatsappDot: 'bg-emerald-300',
-    whatsappChatBg: 'bg-[#ECE5DD]', 
+    whatsappChatBg: 'bg-white', 
     whatsappBubbleOutgoing: 'bg-[#D9FDD3]', 
-    whatsappBubbleIncoming: 'bg-white',     
+    whatsappBubbleIncoming: 'bg-gray-200', 
 };
 
 // --- Data Structures ---
@@ -311,10 +311,11 @@ const AnimatedWhatsAppChat = ({ theme }) => {
     const chatWindowBg = currentTheme.whatsappChatBg; 
 
     return (
-        <div className={`w-full max-w-md h-[500px] p-4 rounded-3xl shadow-2xl overflow-hidden relative ${chatWindowBg} border ${currentTheme.cardBorder}`}>
-            {/* WhatsApp Wallpaper Texture (Public domain image URL for the subtle pattern) */}
-            <div className="absolute inset-0 z-0 opacity-20" style={{ backgroundImage: `url('https://i.imgur.com/G5qWw8O.png')`, backgroundRepeat: 'repeat', backgroundSize: '100px' }}></div>
-
+        // Increased height to h-[700px]
+        <div className={`w-full max-w-md h-[700px] p-4 rounded-3xl shadow-2xl overflow-hidden relative ${chatWindowBg} border ${currentTheme.cardBorder}`}>
+            
+            {/* Background image layer REMOVED to use solid color from chatWindowBg. */}
+            
             {/* Header: WhatsApp style */}
             <div className={`absolute top-0 left-0 w-full h-16 ${currentTheme.whatsappBg} flex items-center justify-between p-4 rounded-t-[1.5rem] shadow-md z-10`}>
                 <div className="flex items-center space-x-3">
@@ -324,7 +325,7 @@ const AnimatedWhatsAppChat = ({ theme }) => {
                 <div className={`w-2.5 h-2.5 ${currentTheme.whatsappDot} rounded-full animate-pulse`}></div>
             </div>
             
-            {/* Messages container */}
+            {/* Messages container - h-full is now based on the new 700px parent height */}
             <div className="pt-20 pb-12 h-full overflow-y-auto space-y-3 relative z-10">
                 {messages.slice(0, currentMessageIndex).map((msg, index) => {
                     const isOutgoing = msg.outgoing;
@@ -504,7 +505,7 @@ const ROISection = ({ theme }) => {
                     <div className={`p-6 md:p-8 rounded-2xl ${accentBg} ${currentTheme.cardBorder} border shadow-xl transition-all duration-300 hover:${currentTheme.accentShadow} transform hover:-translate-y-1`}>
                         <Zap className={`w-8 h-8 md:w-10 md:h-10 text-green-500 mx-auto mb-4`} />
                         <span className={`text-5xl md:text-6xl font-extrabold ${currentTheme.primaryColor}`}>Instant</span>
-                        <p className className={`text-xl font-semibold ${currentTheme.textPrimary} mt-4`}>Traveller Query Resolution</p>
+                        <p className={`text-xl font-semibold ${currentTheme.textPrimary} mt-4`}>Traveller Query Resolution</p>
                         <p className={`text-sm ${currentTheme.textSecondary} mt-2`}>Instant chatbot replies vs. hours or days of waiting.</p>
                     </div>
 
@@ -691,8 +692,8 @@ const App = () => {
             return newTheme;
         });
     };
-
-    // VERCEL ANALYTICS INJECTION ADDED HERE
+    
+    // VERCEL ANALYTICS INJECTION
     useEffect(() => {
         // Initializes Vercel Analytics tracking scripts once on page load
         inject();
@@ -767,8 +768,9 @@ const App = () => {
                         Automate MICE & Leisure Travel Operations
                     </p>
                     <h2 className={`text-5xl md:text-7xl font-extrabold ${currentTheme.textPrimary} leading-tight mb-6 animate-fadeIn delay-300`}>
-                        End the <span className={currentTheme.primaryColor}>Scaling Nightmare</span>.
-                        <br className="hidden sm:inline" /> Start Scaling Seamlessly.
+                        Grow your <span className={currentTheme.primaryColor}>Operations</span>.
+                        <br className="hidden sm:inline" /> Seamlessly without hiring!
+
                     </h2>
                     <p className={`text-xl ${currentTheme.textSecondary} max-w-3xl mx-auto mb-10 animate-fadeIn delay-500`}>
                         tripIT Bot is the WhatsApp-first Chatbot that automates traveller communication, document distribution, and data collection in one unified, cost-efficient platform.
@@ -875,7 +877,7 @@ const App = () => {
             <ROISection theme={theme} />
 
             
-            {/* Testimonials Section */}
+            {/* Testimonials Section - FIXED BUTTON VISIBILITY AND ADDED ANIMATION LOGIC */}
             <section id="testimonials" className={`py-20 md:py-32 ${currentTheme.bgPrimary}`}>
                 <div className="container mx-auto px-4 sm:px-6">
                     <h3 className={`text-3xl md:text-4xl font-extrabold text-center ${currentTheme.textPrimary} mb-12`}>
@@ -883,14 +885,16 @@ const App = () => {
                     </h3>
                     <div className="max-w-4xl mx-auto">
                         <div className="flex justify-center mb-8 space-x-2">
-                            <button onClick={() => setActiveTab('testimonial1')} className={`w-3 h-3 rounded-full transition-colors duration-300 ${activeTab === 'testimonial1' ? `${currentTheme.primaryColor.replace('text', 'bg')} scale-125` : `${currentTheme.textSecondary.replace('text', 'bg')}`}`}></button>
-                            <button onClick={() => setActiveTab('testimonial2')} className={`w-3 h-3 rounded-full transition-colors duration-300 ${activeTab === 'testimonial2' ? `${currentTheme.primaryColor.replace('text', 'bg')} scale-125` : `${currentTheme.textSecondary.replace('text', 'bg')}`}`}></button>
-                            <button onClick={() => setActiveTab('testimonial3')} className={`w-3 h-3 rounded-full transition-colors duration-300 ${activeTab === 'testimonial3' ? `${currentTheme.primaryColor.replace('text', 'bg')} scale-125` : `${currentTheme.textSecondary.replace('text', 'bg')}`}`}></button>
+                            {/* FIX: Using explicit background classes for visibility */}
+                            <button onClick={() => setActiveTab('testimonial1')} className={`w-3 h-3 rounded-full transition-colors duration-300 ${activeTab === 'testimonial1' ? `${currentTheme.primaryColor.replace('text', 'bg')} scale-125` : 'bg-gray-400 dark:bg-gray-600'}`}></button>
+                            <button onClick={() => setActiveTab('testimonial2')} className={`w-3 h-3 rounded-full transition-colors duration-300 ${activeTab === 'testimonial2' ? `${currentTheme.primaryColor.replace('text', 'bg')} scale-125` : 'bg-gray-400 dark:bg-gray-600'}`}></button>
+                            <button onClick={() => setActiveTab('testimonial3')} className={`w-3 h-3 rounded-full transition-colors duration-300 ${activeTab === 'testimonial3' ? `${currentTheme.primaryColor.replace('text', 'bg')} scale-125` : 'bg-gray-400 dark:bg-gray-600'}`}></button>
                         </div>
 
                         <div className={`p-8 md:p-10 rounded-3xl shadow-2xl min-h-[250px] flex items-center transition-opacity duration-500 ${currentTheme.primaryColor.replace('text', 'bg')}/10 border ${currentTheme.primaryColor.replace('text', 'border')}/30`}>
+                            {/* ENHANCEMENT: Using 'key' to trigger transition on content change */}
                             {activeTab === 'testimonial1' && (
-                                <div className="opacity-100 transition-opacity duration-500">
+                                <div key="t1" className="opacity-0 animate-fadeInUp-quick w-full">
                                     <p className={`text-xl md:text-2xl italic ${currentTheme.textPrimary} mb-6`}>
                                         “JOY transformed our group trip communications. No more late-night calls or missed emails — our travellers had everything at their fingertips.”
                                     </p>
@@ -898,7 +902,7 @@ const App = () => {
                                 </div>
                             )}
                             {activeTab === 'testimonial2' && (
-                                <div className="opacity-100 transition-opacity duration-500">
+                                <div key="t2" className="opacity-0 animate-fadeInUp-quick w-full">
                                     <p className={`text-xl md:text-2xl italic ${currentTheme.textPrimary} mb-6`}>
                                         “The quick and standardized responses from JOY Chatbot for our 160+ traveller group to Hong Kong was a breeze. All travel documents being readily downloadable was a game changer.”
                                     </p>
@@ -906,7 +910,7 @@ const App = () => {
                                 </div>
                             )}
                             {activeTab === 'testimonial3' && (
-                                <div className="opacity-100 transition-opacity duration-500">
+                                <div key="t3" className="opacity-0 animate-fadeInUp-quick w-full">
                                     <p className={`text-xl md:text-2xl italic ${currentTheme.textPrimary} mb-6`}>
                                         “Feedback collection was effortless and gave us structured insights we never had before.”
                                     </p>
@@ -948,13 +952,28 @@ const App = () => {
 
                     {/* Copyright and Made With Love */}
                     <p className={`text-sm ${currentTheme.textSecondary} mb-2`}>
-                        &copy; {new Date().getFullYear()} **tripIT Solutions**. All rights reserved.
+                        &copy; {new Date().getFullYear()} tripIT Solutions. All rights reserved.
                     </p>
                     <p className={`text-xs flex items-center justify-center ${currentTheme.textSecondary}`}>
-                        Made with <Heart className="w-3 h-3 mx-1 text-red-500" /> Mumbai, India.
+                        Made with <Heart className="w-3 h-3 mx-1 text-red-500" />in  Mumbai, India.
                     </p>
                 </div>
             </footer>
+            
+            {/* NEW CSS KEYFRAME FOR QUICKER TESTIMONIAL FADE */}
+            <style jsx="true">{`
+                @keyframes fadeInUp-quick {
+                    from { opacity: 0; transform: translateY(10px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                .animate-fadeInUp-quick {
+                    animation-name: fadeInUp-quick;
+                    animation-duration: 0.3s;
+                    animation-timing-function: ease-out;
+                    animation-fill-mode: forwards;
+                }
+            `}</style>
+
         </div>
     );
 };
