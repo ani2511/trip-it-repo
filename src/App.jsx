@@ -789,7 +789,7 @@ const App = () => {
                         Automate MICE & Leisure Travel Operations
                     </p>
                     <h2 className={`text-5xl md:text-7xl font-extrabold ${currentTheme.textPrimary} leading-tight mb-6 animate-fadeIn delay-300`}>
-                        Grow your <span className={currentTheme.primaryColor}>Operations,</span>.
+                        Grow your <span className={currentTheme.primaryColor}>Operations</span>,
                         <br className="hidden sm:inline" /> Seamlessly without hiring!
                     </h2>
                     <p className={`text-xl ${currentTheme.textSecondary} max-w-3xl mx-auto mb-10 animate-fadeIn delay-500`}>
