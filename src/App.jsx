@@ -77,12 +77,9 @@ const ScrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 };
 
+// MODIFIED: This function now always returns 'dark'
 const getInitialTheme = () => {
-    const hour = new Date().getHours();
-    if (hour >= 18 || hour < 6) { 
-        return 'dark';
-    }
-    return 'light';
+    return 'dark';
 };
 
 // -----------------------------------------------------------------------------
@@ -221,9 +218,9 @@ const Header = ({ theme, toggleTheme, activeSection }) => {
     );
 };
 
-/**
- * Animated Globe SVG Component
- */
+// -----------------------------------------------------------------------------
+// Animated Globe SVG Component
+// -----------------------------------------------------------------------------
 const AnimatedGlobeSVG = ({ theme }) => {
     return (
         <div className={`w-full max-w-5xl mx-auto mt-12 mb-8 ${theme}`} style={{ height: '300px' }}>
@@ -280,9 +277,9 @@ const AnimatedGlobeSVG = ({ theme }) => {
     );
 };
 
-/**
- * Animated WhatsApp Chat Demo
- */
+// -----------------------------------------------------------------------------
+// Animated WhatsApp Chat Demo
+// -----------------------------------------------------------------------------
 const AnimatedWhatsAppChat = ({ theme }) => {
     const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
     const currentTheme = theme === 'dark' ? darkTheme : lightTheme;
@@ -396,9 +393,9 @@ const AnimatedWhatsAppChat = ({ theme }) => {
     );
 };
 
-/**
- * Workflow Step Component
- */
+// -----------------------------------------------------------------------------
+// Workflow Step Component
+// -----------------------------------------------------------------------------
 const WorkflowStep = ({ step, index, isVisible, theme }) => {
     const currentTheme = theme === 'dark' ? darkTheme : lightTheme;
     const accentColor = currentTheme.primaryColor.replace('text', 'bg');
@@ -431,9 +428,9 @@ const WorkflowStep = ({ step, index, isVisible, theme }) => {
     );
 };
 
-/**
- * Animated Number Counter Component
- */
+// -----------------------------------------------------------------------------
+// Animated Number Counter Component
+// -----------------------------------------------------------------------------
 const NumberCounter = ({ targetValue, duration, theme }) => {
     const [count, setCount] = useState(0);
     const ref = useRef(null);
@@ -487,9 +484,9 @@ const NumberCounter = ({ targetValue, duration, theme }) => {
     );
 };
 
-/**
- * ROI Section Component
- */
+// -----------------------------------------------------------------------------
+// ROI Section Component
+// -----------------------------------------------------------------------------
 const ROISection = ({ theme }) => {
     const currentTheme = theme === 'dark' ? darkTheme : lightTheme;
     const accentBg = theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100';
@@ -530,9 +527,9 @@ const ROISection = ({ theme }) => {
     );
 };
 
-/**
- * Contact/Form Section Component (Active Form)
- */
+// -----------------------------------------------------------------------------
+// Contact/Form Section Component (Active Form)
+// -----------------------------------------------------------------------------
 const ContactSection = ({ theme }) => {
     const currentTheme = theme === 'dark' ? darkTheme : lightTheme;
     const inputClasses = `w-full p-3 rounded-lg ${currentTheme.cardBg} ${currentTheme.cardBorder} border focus:ring-2 ${currentTheme.primaryColor.replace('text', 'focus:ring')} ${currentTheme.textPrimary} placeholder:${currentTheme.textSecondary}`;
@@ -577,7 +574,7 @@ const ContactSection = ({ theme }) => {
                     Ready to Scale Your Operations?
                 </h3>
                 <p className={`text-xl ${currentTheme.textSecondary} text-center max-w-2xl mx-auto mb-12`}>
-                    Get in touch to schedule a demo and see the tripIT Bot workflow in action.
+                    Get in touch to schedule a demo and see the tripIT in action.
                 </p>
 
                 <div className="max-w-3xl mx-auto">
@@ -789,11 +786,11 @@ const App = () => {
                         Automate MICE & Leisure Travel Operations
                     </p>
                     <h2 className={`text-5xl md:text-7xl font-extrabold ${currentTheme.textPrimary} leading-tight mb-6 animate-fadeIn delay-300`}>
-                        Grow your <span className={currentTheme.primaryColor}>Operations</span>,
-                        <br className="hidden sm:inline" /> Seamlessly without hiring!
+                        Grow your <span className={currentTheme.primaryColor}>Operations</span> seamlessly,
+                        <br className="hidden sm:inline" /> without hiring!
                     </h2>
                     <p className={`text-xl ${currentTheme.textSecondary} max-w-3xl mx-auto mb-10 animate-fadeIn delay-500`}>
-                        tripIT Bot is the WhatsApp-first Chatbot that automates traveller communication, document distribution, and data collection in one unified, cost-efficient platform.
+                        tripIT Bot is the solution for travel companies that automates traveller communication, data collection and document distribution in one unified, cost-efficient platform.
                     </p>
                     {/* Primary CTA now links to the first content section */}
                     <button
@@ -918,7 +915,7 @@ const App = () => {
                             {activeTab === 'testimonial1' && (
                                 <div key="t1" className="opacity-0 animate-fadeInUp-quick w-full">
                                     <p className={`text-xl md:text-2xl italic ${currentTheme.textPrimary} mb-6`}>
-                                        “JOY transformed our group trip communications. No more late-night calls or missed emails — our travellers had everything at their fingertips.”
+                                        “Our pax communications were totally transformed. No more late-night calls or missed emails — our travellers had everything at their fingertips.”
                                     </p>
                                     <p className={`text-lg font-semibold ${currentTheme.primaryColor}`}>— Head of MICE, Leading Travel Agency</p>
                                 </div>
@@ -926,7 +923,7 @@ const App = () => {
                             {activeTab === 'testimonial2' && (
                                 <div key="t2" className="opacity-0 animate-fadeInUp-quick w-full">
                                     <p className={`text-xl md:text-2xl italic ${currentTheme.textPrimary} mb-6`}>
-                                        “The quick and standardized responses from JOY Chatbot for our 160+ traveller group to Hong Kong was a breeze. All travel documents being readily downloadable was a game changer.”
+                                        “The quick and standardized responses from the Chatbot for our 160+ traveller group to Hong Kong was a breeze. All travel documents being readily downloadable was a game changer.”
                                     </p>
                                     <p className={`text-lg font-semibold ${currentTheme.primaryColor}`}>— MICE Travel Manager, Branch Banking, Leading Commercial Bank</p>
                                 </div>
